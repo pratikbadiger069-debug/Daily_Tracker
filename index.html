@@ -157,6 +157,50 @@
   .task-cat{ font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim); }
   .task-time{ font-size:10.5px; color:var(--text-faint); font-family:'JetBrains Mono',monospace; }
 
+  /* EDITABLE SCHEDULE */
+  .task-edit{ display:none; align-items:center; gap:8px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); }
+  .task-edit input{ flex:1; height:36px; border-radius:8px; border:1px solid var(--border); background:#10121a; color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:500; padding:0 12px; outline:none; }
+  .task-edit input:focus{ border-color:var(--green); }
+  .task-edit select{ height:36px; border-radius:8px; border:1px solid var(--border); background:#10121a; color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:600; padding:0 10px; outline:none; }
+  .task-edit .xp-input{ width:70px; }
+  .task-actions{ display:flex; gap:6px; margin-top:8px; }
+  .task-btn{ height:32px; padding:0 12px; border-radius:8px; border:none; font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:.5px; cursor:pointer; transition:all .15s ease; }
+  .task-btn.save{ background:var(--green); color:#000; }
+  .task-btn.save:hover{ box-shadow:0 0 12px rgba(204,255,0,0.4); }
+  .task-btn.cancel{ background:#1c202d; color:var(--text-dim); border:1px solid var(--border); }
+  .task-btn.cancel:hover{ border-color:var(--red); color:var(--red); }
+  .task-btn.delete{ background:rgba(255,51,85,0.15); color:var(--red); border:1px solid rgba(255,51,85,0.3); }
+  .task-btn.delete:hover{ background:var(--red); color:#fff; } .task-edit-btn{ width:28px; height:28px; border-radius:6px; border:1px solid var(--border); background:transparent; color:var(--text-dim); font-size:14px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .15s ease; flex:none; margin-left:auto; } .task-edit-btn:hover{ border-color:var(--green); color:var(--green); } .task.editing .task-edit-btn{ display:none; } .task.editing .task-actions{ display:flex; width:100%; }
+  .task.editing .task-edit{ display:flex; }
+  .task.editing .task-body{ display:none; }
+
+  /* ADD TASK BAR */
+  .add-task-bar{ display:flex; gap:8px; margin-top:10px; padding:12px; border:1px dashed var(--border); border-radius:var(--radius-md); background:rgba(255,255,255,0.02); }
+  .add-task-bar input{ flex:1; height:40px; border-radius:8px; border:1px solid var(--border); background:#10121a; color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:500; padding:0 12px; outline:none; }
+  .add-task-bar input:focus{ border-color:var(--green); }
+  .add-task-bar select{ height:40px; border-radius:8px; border:1px solid var(--border); background:#10121a; color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:600; padding:0 10px; outline:none; }
+  .add-task-bar .xp-input{ width:70px; }
+  .add-task-bar .add-btn{ width:40px; height:40px; border-radius:8px; border:none; background:var(--green); color:#000; font-size:20px; font-weight:900; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .15s ease; box-shadow:0 0 12px rgba(204,255,0,0.3); }
+  .add-task-bar .add-btn:hover{ transform:scale(1.05); box-shadow:0 0 18px rgba(204,255,0,0.5); }
+
+  /* ENHANCED DASHBOARD STAT BAR */
+  .stat-bar{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:14px; }
+  .stat-tile{ padding:14px 10px; text-align:center; border-radius:var(--radius-md); border:1px solid var(--border); background:var(--surface); transition:all .2s ease; }
+  .stat-tile:hover{ border-color:#363a52; transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,0.3); }
+  .stat-tile.primary{ border-color:rgba(204,255,0,0.4); background:rgba(204,255,0,0.04); }
+  .stat-tile .st-val{ font-family:'Bebas Neue',sans-serif; font-size:28px; font-weight:400; letter-spacing:1px; line-height:1; }
+  .stat-tile .st-lbl{ font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-faint); font-weight:700; margin-top:4px; }
+  .stat-tile .st-val.green{ color:var(--green); }
+  .stat-tile .st-val.blue{ color:var(--blue); }
+  .stat-tile .st-val.amber{ color:var(--amber); }
+  .stat-tile .st-val.violet{ color:var(--violet); }
+
+  /* EMPTY STATE FOR TASKS */
+  .tasks-empty{ padding:32px 20px; text-align:center; color:var(--text-dim); }
+  .tasks-empty .empty-icon{ font-size:40px; margin-bottom:10px; opacity:0.5; }
+  .tasks-empty .empty-title{ font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--text); margin-bottom:4px; letter-spacing:1px; }
+  .tasks-empty .empty-sub{ font-size:13px; color:var(--text-faint); font-weight:500; }
+
   .heatmap-card{ padding:18px; margin-top:14px; overflow-x:auto; }
   .heatmap-grid{ display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,1fr); gap:4px; width:max-content; }
   .hm-cell{ width:12px; height:12px; border-radius:3px; background:#181b28; }
@@ -392,6 +436,13 @@
       <p class="quote-text" id="quoteText">Loading today's quote…</p>
     </div>
 
+    <div class="stat-bar">
+      <div class="stat-tile primary"><div class="st-val green" id="dashDone">0</div><div class="st-lbl">Tasks Done</div></div>
+      <div class="stat-tile"><div class="st-val blue" id="dashWater">0/8</div><div class="st-lbl">Water</div></div>
+      <div class="stat-tile"><div class="st-val amber" id="dashStreak">0</div><div class="st-lbl">Streak</div></div>
+      <div class="stat-tile"><div class="st-val violet" id="dashXp">0</div><div class="st-lbl">XP Today</div></div>
+    </div>
+
     <div class="grid2">
       <div class="glass ring-card">
         <div class="ring-wrap">
@@ -452,12 +503,6 @@
     </div>
 
     <div class="sec-title">
-      <h2>Today's Schedule</h2>
-      <span class="tag mono" id="schedTag">0/0</span>
-    </div>
-    <div id="taskList"></div>
-
-    <div class="sec-title">
       <h2>Consistency</h2>
       <span class="tag">last 12 weeks</span>
     </div>
@@ -472,6 +517,12 @@
         <span>More</span>
       </div>
     </div>
+
+    <div class="sec-title">
+      <h2>Today's Schedule</h2>
+      <span class="tag mono" id="schedTag">0/0</span>
+    </div>
+    <div id="taskList"></div>
   </section>
 
   <!-- STUB PAGES -->
@@ -864,23 +915,63 @@
     return '<svg viewBox="0 0 24 24" fill="none" stroke="#04150a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
   }
 
+  function escapeHtml(str){
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
   function renderTasks(){
     var tasks = todayTasks();
     var wrap = document.getElementById("taskList");
     wrap.innerHTML = "";
+    
+    if(tasks.length === 0){
+      wrap.innerHTML = '<div class="tasks-empty"><div class="empty-icon">📋</div><div class="empty-title">No tasks yet</div><div class="empty-sub">Add your first task to get started!</div></div>';
+      return;
+    }
+    
     tasks.forEach(function(t){
       var div = document.createElement("div");
       div.className = "task" + (t.done ? " done" : "");
+      div.dataset.id = t.id;
       div.innerHTML =
-        '<button class="task-check" data-id="'+t.id+'" aria-label="Mark '+t.name+' complete">'+checkIcon()+'</button>'+
+        '<button class="task-check" data-id="'+t.id+'" aria-label="Mark '+escapeHtml(t.name)+' complete">'+checkIcon()+'</button>'+
         '<div class="task-body">'+
-          '<div class="task-top"><span class="task-name">'+t.name+'</span><span class="task-xp mono">+'+t.xp+' xp</span></div>'+
-          '<div class="task-meta"><span class="task-cat">'+t.category+'</span>'+
+          '<div class="task-top"><span class="task-name">'+escapeHtml(t.name)+'</span><span class="task-xp mono">+'+t.xp+' xp</span></div>'+
+          '<div class="task-meta"><span class="task-cat">'+escapeHtml(t.category)+'</span>'+
           (t.completedAt ? '<span class="task-time">'+t.completedAt+'</span>' : '')+
           '</div>'+
+        '</div>'+
+        '<button class="task-edit-btn" data-id="'+t.id+'" aria-label="Edit task">✎</button>'+
+        '<div class="task-edit">'+
+          '<input type="text" class="edit-name" value="'+escapeHtml(t.name)+'" placeholder="Task name">'+
+          '<select class="edit-cat">'+
+            '<option value="Morning"'+(t.category==="Morning"?" selected":"")+'>Morning</option>'+
+            '<option value="Day"'+(t.category==="Day"?" selected":"")+'>Day</option>'+
+            '<option value="Evening"'+(t.category==="Evening"?" selected":"")+'>Evening</option>'+
+          '</select>'+
+          '<input type="number" class="xp-input edit-xp" value="'+t.xp+'" min="1" max="100" placeholder="XP">'+
+        '</div>'+
+        '<div class="task-actions">'+
+          '<button class="task-btn save" data-id="'+t.id+'">Save</button>'+
+          '<button class="task-btn cancel" data-id="'+t.id+'">Cancel</button>'+
+          '<button class="task-btn delete" data-id="'+t.id+'">Delete</button>'+
         '</div>';
       wrap.appendChild(div);
     });
+    
+    // Add the "Add Task" bar at the end
+    var addBar = document.createElement("div");
+    addBar.className = "add-task-bar glass";
+    addBar.innerHTML =
+      '<input type="text" id="newTaskName" placeholder="Add a new task..." maxlength="50">'+
+      '<select id="newTaskCat">'+
+        '<option value="Morning">Morning</option>'+
+        '<option value="Day">Day</option>'+
+        '<option value="Evening">Evening</option>'+
+      '</select>'+
+      '<input type="number" class="xp-input" id="newTaskXp" value="10" min="1" max="100" placeholder="XP">'+
+      '<button class="add-btn" id="addTaskBtn" aria-label="Add task">+</button>';
+    wrap.appendChild(addBar);
   }
 
   function renderHeatmap(){
@@ -1054,9 +1145,26 @@
     showToast("Removed: " + act.name);
   }
 
+  function renderDashStats(){
+    var tasks = todayTasks();
+    var done = tasks.filter(function(t){return t.done;}).length;
+    var todayXp = tasks.filter(function(t){return t.done;}).reduce(function(acc, t){return acc + t.xp;}, 0);
+    var water = (state.water[todayStr()] || 0);
+    
+    var dashDone = document.getElementById("dashDone");
+    var dashWater = document.getElementById("dashWater");
+    var dashStreak = document.getElementById("dashStreak");
+    var dashXp = document.getElementById("dashXp");
+    
+    if(dashDone) dashDone.textContent = done + "/" + tasks.length;
+    if(dashWater) dashWater.textContent = water + "/8";
+    if(dashStreak) dashStreak.textContent = state.streak;
+    if(dashXp) dashXp.textContent = todayXp;
+  }
+
   function renderAll(){
     renderHUD(); renderGreeting(); renderQuote(); renderRing();
-    renderStreak(); renderQuickLog(); renderTasks(); renderHeatmap();
+    renderStreak(); renderQuickLog(); renderDashStats(); renderTasks(); renderHeatmap();
 
     renderFitnessPage(); renderProfile();
   }
@@ -1089,13 +1197,13 @@
     renderAll();
   }
 
-  function setMood(val){ state.mood[todayStr()] = val; saveState(); renderQuickLog(); }
-  function setEnergy(val){ state.energy[todayStr()] = val; saveState(); renderQuickLog(); }
+  function setMood(val){ state.mood[todayStr()] = val; saveState(); renderQuickLog(); renderDashStats(); }
+  function setEnergy(val){ state.energy[todayStr()] = val; saveState(); renderQuickLog(); renderDashStats(); }
   function adjustWater(delta){
     var t = todayStr();
     var cur = state.water[t] || 0;
     state.water[t] = Math.max(0, Math.min(12, cur+delta));
-    saveState(); renderQuickLog();
+    saveState(); renderQuickLog(); renderDashStats();
   }
 
 
@@ -1124,14 +1232,133 @@
       });
     });
     document.getElementById("fabAdd").addEventListener("click", function(){
-      showToast("Quick add is coming in a later step");
+      showPage("home");
+      var nameInput = document.getElementById("newTaskName");
+      if(nameInput){
+        nameInput.scrollIntoView({ behavior: "smooth", block: "center" });
+        setTimeout(function(){ nameInput.focus(); }, 300);
+      }
     });
+  }
+
+  function updateTask(id, name, category, xp){
+    var tasks = todayTasks();
+    var t = tasks.find(function(x){return x.id===id;});
+    if(!t) return;
+    var wasDone = t.done;
+    var oldXp = t.xp;
+    t.name = name.trim() || t.name;
+    t.category = category || t.category;
+    t.xp = Math.max(1, Math.min(100, parseInt(xp) || 10));
+    if(wasDone){
+      state.xp = state.xp - oldXp + t.xp;
+      state.coins = Math.max(0, state.coins - Math.round(oldXp/2) + Math.round(t.xp/2));
+    }
+    saveState();
+    renderAll();
+    showToast("Task updated");
+  }
+
+  function deleteTask(id){
+    var tasks = todayTasks();
+    var t = tasks.find(function(x){return x.id===id;});
+    if(!t) return;
+    if(t.done){
+      state.xp = Math.max(0, state.xp - t.xp);
+      state.coins = Math.max(0, state.coins - Math.round(t.xp/2));
+    }
+    state.tasksByDate[todayStr()] = tasks.filter(function(x){return x.id!==id;});
+    state.history[todayStr()] = completionPctFor(todayStr());
+    saveState();
+    renderAll();
+    showToast("Task deleted");
+  }
+
+  function addTask(name, category, xp){
+    if(!name || name.trim() === ""){
+      showToast("Please enter a task name");
+      return;
+    }
+    var tasks = todayTasks();
+    var newTask = {
+      id: uid(),
+      name: name.trim(),
+      category: category || "Day",
+      xp: Math.max(1, Math.min(100, parseInt(xp) || 10)),
+      done: false,
+      notes: "",
+      completedAt: null
+    };
+    tasks.push(newTask);
+    state.tasksByDate[todayStr()] = tasks;
+    state.history[todayStr()] = completionPctFor(todayStr());
+    saveState();
+    renderAll();
+    showToast("Task added");
   }
 
   function initEvents(){
     document.getElementById("taskList").addEventListener("click", function(e){
-      var btn = e.target.closest(".task-check");
-      if(btn) toggleTask(btn.dataset.id);
+      var checkBtn = e.target.closest(".task-check");
+      if(checkBtn){ toggleTask(checkBtn.dataset.id); return; }
+
+      var editBtn = e.target.closest(".task-edit-btn");
+      if(editBtn){
+        var taskEl = editBtn.closest(".task");
+        document.querySelectorAll(".task.editing").forEach(function(t){ t.classList.remove("editing"); });
+        taskEl.classList.add("editing");
+        taskEl.querySelector(".edit-name").focus();
+        return;
+      }
+
+      var saveBtn = e.target.closest(".task-btn.save");
+      if(saveBtn){
+        var taskEl = saveBtn.closest(".task");
+        var id = taskEl.dataset.id;
+        var name = taskEl.querySelector(".edit-name").value;
+        var cat = taskEl.querySelector(".edit-cat").value;
+        var xp = taskEl.querySelector(".edit-xp").value;
+        updateTask(id, name, cat, xp);
+        return;
+      }
+
+      var cancelBtn = e.target.closest(".task-btn.cancel");
+      if(cancelBtn){
+        var taskEl = cancelBtn.closest(".task");
+        taskEl.classList.remove("editing");
+        renderTasks();
+        return;
+      }
+
+      var deleteBtn = e.target.closest(".task-btn.delete");
+      if(deleteBtn){
+        if(confirm("Delete this task?")){
+          deleteTask(deleteBtn.dataset.id);
+        }
+        return;
+      }
+
+      var addBtn = e.target.closest("#addTaskBtn");
+      if(addBtn){
+        var nameEl = document.getElementById("newTaskName");
+        var catEl = document.getElementById("newTaskCat");
+        var xpEl = document.getElementById("newTaskXp");
+        addTask(nameEl.value, catEl.value, xpEl.value);
+        nameEl.value = "";
+        nameEl.focus();
+        return;
+      }
+    });
+
+    document.getElementById("taskList").addEventListener("keydown", function(e){
+      if(e.key === "Enter"){
+        if(e.target.id === "newTaskName"){
+          document.getElementById("addTaskBtn").click();
+        }
+        if(e.target.classList.contains("edit-name")){
+          e.target.closest(".task").querySelector(".task-btn.save").click();
+        }
+      }
     });
     document.querySelectorAll('.chip-set[data-group="mood"] .chip').forEach(function(c){
       c.addEventListener("click", function(){ setMood(Number(c.dataset.val)); });
