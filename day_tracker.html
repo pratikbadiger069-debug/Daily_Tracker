@@ -5,46 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Day_Tracker — Win the day. Every day.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#05070a;
-    --bg-elev:#0b0e13;
-    --surface:rgba(255,255,255,0.045);
-    --surface-strong:rgba(255,255,255,0.08);
-    --border:rgba(255,255,255,0.09);
-    --text:#eef1f5;
-    --text-dim:#8b93a1;
-    --text-faint:#5b6270;
-    --green:#39ff88;
-    --green-dim:#1f8f52;
-    --blue:#4da3ff;
-    --amber:#ffb443;
-    --violet:#b58aff;
-    --red:#ff5c5c;
-    --radius-lg:22px;
-    --radius-md:16px;
-    --radius-sm:10px;
+    --bg:#090a0f;
+    --bg-elev:#11131c;
+    --surface:#151822;
+    --surface-strong:#1c202d;
+    --border:#262a3c;
+    --text:#ffffff;
+    --text-dim:#9499ad;
+    --text-faint:#5b6075;
+    --green:#ccff00;
+    --green-dim:#84a600;
+    --blue:#00e5ff;
+    --amber:#ff9900;
+    --violet:#a855f7;
+    --red:#ff3355;
+    --radius-lg:16px;
+    --radius-md:12px;
+    --radius-sm:8px;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-  html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; overscroll-behavior-y:none;}
+  html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; overscroll-behavior-y:none;}
   body{ min-height:100vh; padding-bottom:96px; }
-  .display{ font-family:'Space Grotesk',sans-serif; }
+  .display{ font-family:'Bebas Neue',sans-serif; letter-spacing:1px; }
   .mono{ font-family:'JetBrains Mono',monospace; }
-  ::selection{ background:var(--green); color:#04120a; }
+  ::selection{ background:var(--green); color:#000; }
 
   a, button, [tabindex]{ outline-offset:3px; }
   a:focus-visible, button:focus-visible, [tabindex]:focus-visible{
-    outline:2px solid var(--green); outline-offset:2px; border-radius:8px;
+    outline:2px solid var(--green); outline-offset:2px; border-radius:6px;
   }
 
-  /* ambient background glow */
   .bg-glow{
     position:fixed; inset:0; z-index:-1; pointer-events:none;
     background:
-      radial-gradient(680px 420px at 12% -6%, rgba(57,255,136,0.10), transparent 60%),
-      radial-gradient(560px 380px at 100% 10%, rgba(77,163,255,0.09), transparent 60%),
-      radial-gradient(600px 500px at 50% 120%, rgba(181,138,255,0.07), transparent 60%),
+      radial-gradient(600px 380px at 15% -5%, rgba(204,255,0,0.08), transparent 65%),
+      radial-gradient(520px 340px at 85% 15%, rgba(0,229,255,0.07), transparent 60%),
+      radial-gradient(500px 400px at 50% 115%, rgba(255,51,85,0.05), transparent 60%),
       var(--bg);
   }
 
@@ -52,185 +51,307 @@
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:var(--radius-lg);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
   }
 
   .app-shell{ max-width:520px; margin:0 auto; padding:0 16px; }
 
-  /* HUD */
   .hud{
     position:sticky; top:0; z-index:30;
     padding:14px 16px 12px;
-    background:linear-gradient(180deg, rgba(5,7,10,0.96) 60%, rgba(5,7,10,0));
-    backdrop-filter:blur(6px);
+    background:linear-gradient(180deg, rgba(9,10,15,0.98) 75%, rgba(9,10,15,0));
+    backdrop-filter:blur(10px);
   }
   .hud-row{ max-width:520px; margin:0 auto; display:flex; align-items:center; gap:12px; }
   .level-badge{
-    width:44px; height:44px; border-radius:14px;
-    background:linear-gradient(145deg, rgba(57,255,136,0.18), rgba(57,255,136,0.03));
-    border:1px solid rgba(57,255,136,0.35);
+    width:44px; height:44px; border-radius:12px;
+    background:linear-gradient(145deg, rgba(204,255,0,0.2), rgba(204,255,0,0.04));
+    border:1.5px solid var(--green);
     display:flex; align-items:center; justify-content:center;
     flex-direction:column; line-height:1;
+    box-shadow: 0 0 12px rgba(204,255,0,0.25);
   }
-  .level-badge .lv-num{ font-size:15px; font-weight:700; color:var(--green); }
-  .level-badge .lv-lbl{ font-size:7px; letter-spacing:.08em; color:var(--text-dim); margin-top:1px; }
+  .level-badge .lv-num{ font-size:16px; font-weight:800; color:var(--green); }
+  .level-badge .lv-lbl{ font-size:7.5px; font-weight:800; letter-spacing:.1em; color:var(--text-dim); margin-top:1px; }
   .xp-track{ flex:1; }
-  .xp-top{ display:flex; justify-content:space-between; font-size:11px; color:var(--text-dim); margin-bottom:4px; }
-  .xp-bar{ height:7px; border-radius:99px; background:rgba(255,255,255,0.07); overflow:hidden; }
-  .xp-fill{ height:100%; border-radius:99px; background:linear-gradient(90deg,var(--green-dim),var(--green)); transition:width .5s cubic-bezier(.22,.9,.3,1); }
-  .hud-stat{ display:flex; align-items:center; gap:5px; font-size:12.5px; color:var(--text-dim); white-space:nowrap; }
-  .hud-stat b{ color:var(--text); font-weight:600; }
+  .xp-top{ display:flex; justify-content:space-between; font-size:12px; color:var(--text-dim); margin-bottom:5px; font-weight:600; }
+  .xp-bar{ height:8px; border-radius:99px; background:#1e2230; overflow:hidden; border:1px solid rgba(255,255,255,0.05); }
+  .xp-fill{ height:100%; border-radius:99px; background:linear-gradient(90deg, #99cc00, var(--green)); box-shadow:0 0 8px rgba(204,255,0,0.6); transition:width .5s cubic-bezier(.22,.9,.3,1); }
+  .hud-stat{ display:flex; align-items:center; gap:5px; font-size:13px; color:var(--text-dim); white-space:nowrap; }
+  .hud-stat b{ color:var(--text); font-weight:700; }
 
-  /* section title */
-  .sec-title{ display:flex; align-items:center; justify-content:space-between; margin:22px 2px 10px; }
-  .sec-title h2{ font-size:14px; margin:0; letter-spacing:.02em; color:var(--text-dim); text-transform:uppercase; font-weight:600; }
-  .sec-title .tag{ font-size:11px; color:var(--text-faint); }
+  .sec-title{ display:flex; align-items:center; justify-content:space-between; margin:24px 2px 12px; }
+  .sec-title h2{ font-family:'Bebas Neue',sans-serif; font-size:22px; margin:0; letter-spacing:1.5px; color:var(--text); font-weight:400; text-transform:uppercase; }
+  .sec-title .tag{ font-size:11px; color:var(--text-faint); font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
 
-  /* quote card */
-  .quote-card{ padding:18px 18px; margin-top:14px; position:relative; overflow:hidden; }
-  .quote-card::before{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(120deg, rgba(181,138,255,0.10), transparent 55%);
-    pointer-events:none;
-  }
-  .quote-cat{ font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--violet); font-weight:600; }
-  .quote-text{ font-family:'Space Grotesk',sans-serif; font-size:17px; line-height:1.45; margin:8px 0 0; color:var(--text); font-weight:500; }
+  .quote-card{ padding:20px; margin-top:14px; position:relative; overflow:hidden; border-left:4px solid var(--green); }
+  .quote-cat{ font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:1.5px; text-transform:uppercase; color:var(--green); font-weight:400; }
+  .quote-text{ font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; line-height:1.5; margin:6px 0 0; color:var(--text); font-weight:600; }
 
-  /* dashboard grid */
   .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
 
-  .ring-card{ padding:18px; display:flex; align-items:center; gap:16px; }
-  .ring-wrap{ position:relative; width:92px; height:92px; flex:none; }
-  .ring-wrap svg{ transform:rotate(-90deg); width:92px; height:92px; }
-  .ring-bg{ fill:none; stroke:rgba(255,255,255,0.08); stroke-width:9; }
-  .ring-fg{ fill:none; stroke:url(#ringGrad); stroke-width:9; stroke-linecap:round; transition:stroke-dashoffset .6s cubic-bezier(.22,.9,.3,1); }
-  .ring-pct{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:18px; }
-  .ring-meta .rt{ font-size:13px; color:var(--text-dim); }
-  .ring-meta .rv{ font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; margin-top:2px; }
+  .ring-card{ padding:18px; display:flex; align-items:center; gap:16px; border:1px solid var(--border); }
+  .ring-wrap{ position:relative; width:84px; height:84px; flex:none; }
+  .ring-wrap svg{ transform:rotate(-90deg); width:84px; height:84px; }
+  .ring-bg{ fill:none; stroke:#1e2230; stroke-width:10; }
+  .ring-fg{ fill:none; stroke:url(#ringGrad); stroke-width:10; stroke-linecap:round; transition:stroke-dashoffset .6s cubic-bezier(.22,.9,.3,1); }
+  .ring-pct{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:24px; color:var(--green); letter-spacing:1px; }
+  .ring-meta .rt{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-faint); font-weight:700; }
+  .ring-meta .rv{ font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:700; margin-top:2px; color:var(--text); }
 
-  .streak-card{ padding:18px; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+  .streak-card{ padding:18px; display:flex; flex-direction:column; justify-content:center; gap:8px; border:1px solid var(--border); }
   .streak-row{ display:flex; align-items:baseline; gap:8px; }
-  .streak-flame{ font-size:20px; }
-  .streak-num{ font-family:'JetBrains Mono',monospace; font-size:26px; font-weight:700; color:var(--amber); }
-  .streak-lbl{ font-size:11.5px; color:var(--text-dim); }
-  .streak-sub{ font-size:11.5px; color:var(--text-faint); }
+  .streak-flame{ font-size:22px; }
+  .streak-num{ font-family:'Bebas Neue',sans-serif; font-size:36px; font-weight:400; color:var(--amber); line-height:1; letter-spacing:1px; }
+  .streak-lbl{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-faint); font-weight:700; }
+  .streak-sub{ font-size:12px; color:var(--text-dim); font-weight:600; }
 
-  /* quick log */
-  .quicklog-card{ padding:16px 18px; margin-top:12px; }
+  .quicklog-card{ padding:18px; margin-top:14px; }
   .ql-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
   .ql-row:last-child{ margin-bottom:0; }
-  .ql-label{ font-size:13px; color:var(--text-dim); min-width:64px; }
+  .ql-label{ font-size:12px; text-transform:uppercase; letter-spacing:.06em; font-weight:700; color:var(--text-dim); min-width:64px; }
   .chip-set{ display:flex; gap:6px; }
   .chip{
-    width:32px; height:32px; border-radius:10px; border:1px solid var(--border);
-    background:rgba(255,255,255,0.03); color:var(--text-dim);
-    font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600;
+    width:34px; height:34px; border-radius:8px; border:1px solid var(--border);
+    background:#11131c; color:var(--text-dim);
+    font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700;
     display:flex; align-items:center; justify-content:center; cursor:pointer;
     transition:all .15s ease;
   }
-  .chip:hover{ border-color:rgba(255,255,255,0.25); }
-  .chip.active-mood{ background:rgba(181,138,255,0.18); border-color:var(--violet); color:var(--violet); }
-  .chip.active-energy{ background:rgba(255,180,67,0.18); border-color:var(--amber); color:var(--amber); }
+  .chip:hover{ border-color:rgba(255,255,255,0.3); color:#fff; }
+  .chip.active-mood{ background:rgba(168,85,247,0.2); border-color:var(--violet); color:var(--violet); box-shadow:0 0 10px rgba(168,85,247,0.3); }
+  .chip.active-energy{ background:rgba(255,153,0,0.2); border-color:var(--amber); color:var(--amber); box-shadow:0 0 10px rgba(255,153,0,0.3); }
   .water-ctrl{ display:flex; align-items:center; gap:10px; }
   .water-btn{
-    width:30px; height:30px; border-radius:9px; border:1px solid var(--border);
-    background:rgba(255,255,255,0.03); color:var(--text); font-size:16px; line-height:1;
+    width:32px; height:32px; border-radius:8px; border:1px solid var(--border);
+    background:#11131c; color:var(--text); font-size:16px; font-weight:700; line-height:1;
     display:flex; align-items:center; justify-content:center; cursor:pointer;
   }
+  .water-btn:hover{ border-color:var(--blue); color:var(--blue); }
   .water-btn:active{ transform:scale(.92); }
-  .water-count{ font-family:'JetBrains Mono',monospace; font-size:14px; min-width:46px; text-align:center; color:var(--blue); }
+  .water-count{ font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700; min-width:46px; text-align:center; color:var(--blue); }
 
-  /* schedule list */
   .task{
     display:flex; align-items:flex-start; gap:12px;
-    padding:13px 14px; border-radius:var(--radius-md);
-    border:1px solid var(--border); background:rgba(255,255,255,0.025);
-    margin-bottom:9px; transition:background .2s ease, border-color .2s ease;
+    padding:14px 16px; border-radius:var(--radius-md);
+    border:1px solid var(--border); background:var(--surface);
+    margin-bottom:10px; transition:all .2s ease;
   }
-  .task.done{ background:rgba(57,255,136,0.045); border-color:rgba(57,255,136,0.22); }
+  .task:hover{ border-color:#363a52; }
+  .task.done{ background:rgba(204,255,0,0.04); border-color:rgba(204,255,0,0.3); }
   .task-check{
-    width:23px; height:23px; border-radius:8px; flex:none; margin-top:1px;
-    border:1.5px solid rgba(255,255,255,0.28); background:transparent;
+    width:24px; height:24px; border-radius:6px; flex:none; margin-top:1px;
+    border:2px solid #3d425a; background:transparent;
     display:flex; align-items:center; justify-content:center; cursor:pointer;
     transition:all .15s ease;
   }
-  .task.done .task-check{ background:var(--green); border-color:var(--green); }
-  .task-check svg{ width:13px; height:13px; opacity:0; transform:scale(.6); transition:all .15s ease; }
+  .task.done .task-check{ background:var(--green); border-color:var(--green); box-shadow:0 0 10px rgba(204,255,0,0.4); }
+  .task-check svg{ width:14px; height:14px; opacity:0; transform:scale(.6); transition:all .15s ease; stroke:#000; stroke-width:3.5; }
   .task.done .task-check svg{ opacity:1; transform:scale(1); }
   .task-body{ flex:1; min-width:0; }
   .task-top{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
-  .task-name{ font-size:14.5px; font-weight:500; color:var(--text); }
-  .task.done .task-name{ color:var(--text-dim); text-decoration:line-through; text-decoration-color:rgba(139,147,161,0.5); }
-  .task-xp{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--green); flex:none; }
+  .task-name{ font-size:14.5px; font-weight:600; color:var(--text); }
+  .task.done .task-name{ color:var(--text-faint); text-decoration:line-through; }
+  .task-xp{ font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:1px; color:var(--green); flex:none; }
   .task-meta{ display:flex; align-items:center; gap:8px; margin-top:4px; }
-  .task-cat{ font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--text-faint); }
+  .task-cat{ font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim); }
   .task-time{ font-size:10.5px; color:var(--text-faint); font-family:'JetBrains Mono',monospace; }
 
-  /* heatmap */
   .heatmap-card{ padding:18px; margin-top:14px; overflow-x:auto; }
-  .heatmap-grid{ display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,1fr); gap:3px; width:max-content; }
-  .hm-cell{ width:12px; height:12px; border-radius:3px; background:rgba(255,255,255,0.05); }
-  .hm-legend{ display:flex; align-items:center; gap:5px; margin-top:12px; font-size:10.5px; color:var(--text-faint); }
+  .heatmap-grid{ display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,1fr); gap:4px; width:max-content; }
+  .hm-cell{ width:12px; height:12px; border-radius:3px; background:#181b28; }
+  .hm-legend{ display:flex; align-items:center; gap:6px; margin-top:14px; font-size:11px; color:var(--text-faint); font-weight:600; text-transform:uppercase; }
   .hm-legend .hm-cell{ width:10px; height:10px; }
 
-  /* nav */
   .bottomnav{
     position:fixed; left:0; right:0; bottom:0; z-index:40;
     display:flex; justify-content:center;
     padding:10px 16px calc(10px + env(safe-area-inset-bottom));
-    background:linear-gradient(0deg, rgba(5,7,10,0.98) 55%, rgba(5,7,10,0));
+    background:linear-gradient(0deg, rgba(9,10,15,0.98) 75%, rgba(9,10,15,0));
   }
   .nav-inner{
     max-width:480px; width:100%;
     display:flex; align-items:center; justify-content:space-between;
-    padding:8px 10px; border-radius:20px;
-    background:rgba(14,17,22,0.85); border:1px solid var(--border);
-    backdrop-filter:blur(20px);
+    padding:8px 12px; border-radius:18px;
+    background:#151822; border:1.5px solid var(--border);
+    box-shadow:0 8px 30px rgba(0,0,0,0.6);
   }
   .nav-btn{
     background:none; border:none; color:var(--text-faint); cursor:pointer;
-    display:flex; flex-direction:column; align-items:center; gap:3px;
-    font-family:'Inter',sans-serif; font-size:10px; padding:6px 12px; border-radius:12px;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:10px; font-weight:700; padding:6px 12px; border-radius:10px;
+    text-transform:uppercase; letter-spacing:.05em;
     transition:color .15s ease;
   }
   .nav-btn.active{ color:var(--green); }
   .nav-btn svg{ width:20px; height:20px; }
   .fab{
-    width:52px; height:52px; border-radius:16px; flex:none; margin:0 4px;
-    background:linear-gradient(145deg, var(--green), #1fae5f);
-    border:none; color:#04150a; display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 22px -6px rgba(57,255,136,0.55); cursor:pointer;
-    transform:translateY(-10px);
+    width:52px; height:52px; border-radius:14px; flex:none; margin:0 4px;
+    background:var(--green);
+    border:none; color:#000; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 20px rgba(204,255,0,0.4); cursor:pointer;
+    transform:translateY(-12px); transition:all .15s ease;
   }
-  .fab:active{ transform:translateY(-8px) scale(.95); }
-  .fab svg{ width:24px; height:24px; }
+  .fab:hover{ transform:translateY(-14px) scale(1.04); box-shadow:0 0 26px rgba(204,255,0,0.6); }
+  .fab:active{ transform:translateY(-10px) scale(.95); }
+  .fab svg{ width:24px; height:24px; stroke:#000; stroke-width:3; }
 
   .page{ display:none; }
-  .page.active{ display:block; animation:fadeUp .35s ease; }
-  @keyframes fadeUp{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  .page.active{ display:block; animation:fadeUp .3s ease; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
 
   .stub{ padding:40px 20px; text-align:center; color:var(--text-dim); }
-  .stub .stub-icon{ font-size:30px; margin-bottom:10px; }
-  .stub .stub-title{ font-family:'Space Grotesk',sans-serif; color:var(--text); font-size:17px; margin-bottom:6px; }
-  .stub .stub-sub{ font-size:13px; color:var(--text-faint); }
+  .stub .stub-icon{ font-size:32px; margin-bottom:10px; }
+  .stub .stub-title{ font-family:'Bebas Neue',sans-serif; color:var(--text); font-size:24px; margin-bottom:6px; letter-spacing:1px; }
+  .stub .stub-sub{ font-size:13px; color:var(--text-faint); font-weight:500; }
 
   .toast{
     position:fixed; left:50%; bottom:110px; transform:translateX(-50%) translateY(20px);
-    background:rgba(20,24,30,0.95); border:1px solid var(--border); color:var(--text);
-    padding:10px 18px; border-radius:14px; font-size:13px; z-index:60;
+    background:#1c202d; border:1.5px solid var(--green); color:var(--text);
+    padding:12px 20px; border-radius:12px; font-size:13.5px; font-weight:700; z-index:60;
     opacity:0; pointer-events:none; transition:all .3s cubic-bezier(.22,.9,.3,1);
-    display:flex; align-items:center; gap:8px; backdrop-filter:blur(10px);
+    display:flex; align-items:center; gap:8px; box-shadow:0 0 20px rgba(204,255,0,0.25);
   }
   .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
   header.top{ padding:18px 2px 0; }
-  header.top .greet{ font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:600; }
-  header.top .sub{ font-size:12.5px; color:var(--text-faint); margin-top:2px; }
+  header.top .greet{ font-family:'Bebas Neue',sans-serif; font-size:32px; font-weight:400; letter-spacing:1px; color:var(--text); }
+  header.top .sub{ font-size:12px; color:var(--text-dim); font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-top:2px; }
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  /* FITNESS & ATHLETIC STYLES */
+  .activity-card{ padding:16px; margin-bottom:12px; position:relative; border:1px solid var(--border); }
+  .activity-card:last-child{ margin-bottom:0; }
+  .activity-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .activity-left{ display:flex; align-items:center; gap:10px; }
+  .activity-icon{ font-size:22px; }
+  .activity-name{ font-size:15px; font-weight:700; color:var(--text); }
+  .activity-unit{ font-size:11px; color:var(--text-faint); margin-left:4px; font-weight:600; text-transform:uppercase; }
+  .activity-delete{
+    width:30px; height:30px; border-radius:8px;
+    border:1px solid rgba(255,51,85,0.3);
+    background:rgba(255,51,85,0.1);
+    color:var(--red); font-size:16px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:all .15s ease;
   }
+  .activity-delete:hover{ background:var(--red); color:#fff; }
+  .activity-input-row{ display:flex; align-items:center; gap:10px; }
+  .activity-input{
+    flex:1; height:44px; border-radius:10px;
+    border:1.5px solid var(--border); background:#10121a;
+    color:var(--text); font-family:'JetBrains Mono',monospace;
+    font-size:18px; font-weight:700; text-align:center;
+    padding:0 12px; outline:none;
+    transition:border-color .15s ease;
+  }
+  .activity-input:focus{ border-color:var(--green); box-shadow:0 0 10px rgba(204,255,0,0.2); }
+  .activity-input::placeholder{ color:var(--text-faint); }
+  .activity-btn{
+    width:44px; height:44px; border-radius:10px;
+    border:none; background:var(--green); color:#000;
+    font-size:18px; font-weight:900;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:all .15s ease;
+    box-shadow:0 0 10px rgba(204,255,0,0.25);
+  }
+  .activity-btn:hover{ transform:scale(1.05); box-shadow:0 0 16px rgba(204,255,0,0.4); }
+  .activity-btn:active{ transform:scale(.94); }
+
+  .manage-bar{ display:flex; gap:10px; margin-top:16px; }
+  .manage-input{
+    flex:1; height:46px; border-radius:10px;
+    border:1.5px solid var(--border); background:#10121a;
+    color:var(--text); font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:14px; font-weight:600; padding:0 14px; outline:none;
+    transition:border-color .15s ease;
+  }
+  .manage-input:focus{ border-color:var(--green); }
+  .manage-input::placeholder{ color:var(--text-faint); }
+  .manage-add{
+    height:46px; padding:0 20px; border-radius:10px;
+    border:none; background:var(--green);
+    color:#000; font-family:'Bebas Neue',sans-serif;
+    font-size:18px; letter-spacing:1px; cursor:pointer;
+    display:flex; align-items:center; gap:6px;
+    transition:all .15s ease; font-weight:400;
+    box-shadow:0 0 12px rgba(204,255,0,0.3);
+  }
+  .manage-add:hover{ transform:scale(1.03); }
+  .manage-add:active{ transform:scale(.95); }
+
+  .empty-state{ padding:32px 20px; text-align:center; }
+  .empty-state .empty-icon{ font-size:40px; margin-bottom:10px; opacity:0.6; }
+  .empty-state .empty-title{ font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--text); margin-bottom:4px; letter-spacing:1px; }
+  .empty-state .empty-sub{ font-size:13px; color:var(--text-faint); font-weight:500; }
+
+  .records-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:6px; }
+  .record-mini{ padding:12px 14px; display:flex; align-items:center; justify-content:space-between; border:1px solid var(--border); }
+  .record-mini-left{ display:flex; align-items:center; gap:8px; }
+  .record-mini-icon{ font-size:16px; }
+  .record-mini-name{ font-size:12px; font-weight:700; color:var(--text-dim); }
+  .record-mini-val{ font-family:'Bebas Neue',sans-serif; font-size:22px; font-weight:400; color:var(--green); letter-spacing:1px; }
+
+  .hud-avatar{
+    width:44px; height:44px; border-radius:12px; flex:none; padding:0;
+    border:1.5px solid var(--green); background:#151822;
+    overflow:hidden; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 10px rgba(204,255,0,0.2);
+  }
+  .hud-avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hud-avatar-fallback{
+    font-size:18px; font-weight:800; color:var(--green);
+    font-family:'Bebas Neue',sans-serif; letter-spacing:1px;
+  }
+  .hud-name{ color:var(--text); font-weight:700; cursor:pointer; transition:color .15s ease; }
+  .hud-name:hover{ color:var(--green); }
+
+  .profile-hero{ padding:24px 18px 22px; margin-top:14px; text-align:center; border:1px solid var(--border); }
+  .profile-photo-wrap{
+    width:96px; height:96px; border-radius:24px; margin:0 auto 14px;
+    border:2px solid var(--green); background:#11131c;
+    overflow:hidden; position:relative; cursor:pointer;
+    box-shadow:0 0 20px rgba(204,255,0,0.25);
+  }
+  .profile-photo-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .profile-photo-fallback{
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    font-size:40px; font-weight:400; color:var(--green);
+    font-family:'Bebas Neue',sans-serif; letter-spacing:1px;
+  }
+  .profile-photo-edit{
+    position:absolute; left:0; right:0; bottom:0;
+    background:rgba(9,10,15,0.85); color:var(--green);
+    font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:1px; padding:4px 0;
+  }
+  .profile-name-input{
+    width:100%; height:48px; border-radius:10px; border:1.5px solid var(--border);
+    background:#10121a; color:var(--text);
+    font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:1px;
+    text-align:center; padding:0 14px; outline:none;
+    transition:border-color .15s ease;
+  }
+  .profile-name-input:focus{ border-color:var(--green); box-shadow:0 0 12px rgba(204,255,0,0.2); }
+  .profile-actions{ display:flex; gap:10px; margin-top:14px; }
+  .profile-save{
+    flex:1; height:46px; border:none; border-radius:10px;
+    background:var(--green);
+    color:#000; font-family:'Bebas Neue',sans-serif;
+    font-size:19px; letter-spacing:1px; font-weight:400; cursor:pointer;
+    box-shadow:0 0 14px rgba(204,255,0,0.3); transition:all .15s ease;
+  }
+  .profile-save:hover{ transform:scale(1.02); }
+  .profile-save:active{ transform:scale(.98); }
+  .profile-remove{
+    height:46px; padding:0 16px; border-radius:10px; cursor:pointer;
+    border:1.5px solid var(--border); background:#11131c;
+    color:var(--text-dim); font-size:13px; font-weight:700;
+  }
+  .profile-stats{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:14px; }
+  .profile-stat{ padding:16px 10px; text-align:center; border:1px solid var(--border); }
+  .profile-stat-val{ font-family:'Bebas Neue',sans-serif; font-size:28px; font-weight:400; color:var(--green); letter-spacing:1px; }
+  .profile-stat-lbl{ font-size:10px; color:var(--text-faint); font-weight:700; margin-top:2px; text-transform:uppercase; letter-spacing:.08em; }
+  .hidden-file{ position:absolute; width:0; height:0; opacity:0; overflow:hidden; }
 </style>
 </head>
 <body>
@@ -238,13 +359,18 @@
 
 <div class="hud">
   <div class="hud-row">
+    <button class="hud-avatar" id="hudAvatarBtn" aria-label="Open profile">
+      <span class="hud-avatar-fallback" id="hudAvatarFallback">Y</span>
+      <img id="hudAvatarImg" alt="Profile photo">
+    </button>
     <div class="level-badge">
       <div class="lv-num mono" id="hudLevel">1</div>
       <div class="lv-lbl">LVL</div>
     </div>
     <div class="xp-track">
       <div class="xp-top">
-        <span id="hudXpLabel" class="mono">0 / 100 XP</span>
+
+        <span id="hudNameBtn" class="hud-name">You</span>
         <span class="hud-stat">🪙 <b id="hudCoins" class="mono">0</b></span>
       </div>
       <div class="xp-bar"><div class="xp-fill" id="hudXpFill" style="width:0%"></div></div>
@@ -272,8 +398,8 @@
           <svg viewBox="0 0 92 92">
             <defs>
               <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#39ff88"/>
-                <stop offset="100%" stop-color="#4da3ff"/>
+                <stop offset="0%" stop-color="#ccff00"/>
+                <stop offset="100%" stop-color="#00e5ff"/>
               </linearGradient>
             </defs>
             <circle class="ring-bg" cx="46" cy="46" r="38"/>
@@ -352,14 +478,79 @@
   <section class="page" id="page-habits">
     <div class="stub"><div class="stub-icon">🗂️</div><div class="stub-title">Habits &amp; Modules</div><div class="stub-sub">Fitness, Reading, Coding, Academics &amp; Goals land here in the next build step.</div></div>
   </section>
+
+  <!-- FITNESS PAGE -->
   <section class="page" id="page-fitness">
-    <div class="stub"><div class="stub-icon">💪</div><div class="stub-title">Fitness Log</div><div class="stub-sub">Coming in the next step.</div></div>
+    <header class="top">
+      <div class="greet">💪 Fitness Log</div>
+      <div class="sub" id="fitnessDateLine">—</div>
+    </header>
+
+    <div class="sec-title">
+      <h2>Personal Records</h2>
+      <span class="tag" id="recordsCount">0 tracked</span>
+    </div>
+    <div class="records-grid" id="recordsGrid"></div>
+
+    <div class="sec-title">
+      <h2>Today's Workout</h2>
+      <span class="tag mono" id="fitnessDate">—</span>
+    </div>
+    <div id="activityList"></div>
+
+    <div class="sec-title">
+      <h2>Manage Activities</h2>
+      <span class="tag">add or remove</span>
+    </div>
+    <div class="glass" style="padding:14px 16px;">
+      <div class="manage-bar">
+        <input type="text" class="manage-input" id="newActivityName" placeholder="Activity name (e.g., Running)" maxlength="30">
+        <button class="manage-add" id="addActivityBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add
+        </button>
+      </div>
+    </div>
   </section>
+
   <section class="page" id="page-analytics">
     <div class="stub"><div class="stub-icon">📊</div><div class="stub-title">Analytics</div><div class="stub-sub">Charts &amp; trends land here in a later step.</div></div>
   </section>
   <section class="page" id="page-profile">
-    <div class="stub"><div class="stub-icon">🏆</div><div class="stub-title">Profile &amp; Achievements</div><div class="stub-sub">Badges, ranks and Goggins Mode are coming up.</div></div>
+
+    <header class="top">
+      <div class="greet">Profile</div>
+      <div class="sub">Your identity on Day_Tracker</div>
+    </header>
+
+    <div class="glass profile-hero">
+      <div class="profile-photo-wrap" id="profilePhotoBtn" title="Change photo">
+        <span class="profile-photo-fallback" id="profilePhotoFallback">Y</span>
+        <img id="profilePhotoImg" alt="Profile photo">
+        <div class="profile-photo-edit">Edit</div>
+      </div>
+      <input type="file" id="profilePhotoInput" class="hidden-file" accept="image/*">
+      <input type="text" class="profile-name-input" id="profileNameInput" maxlength="24" placeholder="Your name" aria-label="Your name">
+      <div class="profile-actions">
+        <button class="profile-save" id="profileSaveBtn">Save name</button>
+        <button class="profile-remove" id="profileRemovePhotoBtn">Remove photo</button>
+      </div>
+    </div>
+
+    <div class="profile-stats">
+      <div class="glass profile-stat">
+        <div class="profile-stat-val mono" id="profileLevel">1</div>
+        <div class="profile-stat-lbl">Level</div>
+      </div>
+      <div class="glass profile-stat">
+        <div class="profile-stat-val mono" id="profileXp">0</div>
+        <div class="profile-stat-lbl">XP</div>
+      </div>
+      <div class="glass profile-stat">
+        <div class="profile-stat-val mono" id="profileStreak">0</div>
+        <div class="profile-stat-lbl">Streak</div>
+      </div>
+    </div>
   </section>
 
 </div>
@@ -430,6 +621,18 @@
     {t:"Do it because you said you would, not because you feel like it.", c:"Discipline"}
   ];
 
+  var DEFAULT_ACTIVITIES = [
+    { id:"fit_1", name:"Push-ups", unit:"reps", icon:"💪" },
+    { id:"fit_2", name:"Pull-ups", unit:"reps", icon:"🏋️" },
+    { id:"fit_3", name:"Resistance Band", unit:"sets", icon:"🎯" },
+    { id:"fit_4", name:"Hand Gripper", unit:"reps", icon:"✊" },
+
+
+
+
+    { id:"fit_5", name:"Walking", unit:"steps", icon:"🚶" }
+  ];
+
   function todayStr(d){
     d = d || new Date();
     var y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0');
@@ -463,29 +666,62 @@
       lastActiveDate:t,
       mood:{}, energy:{}, water:{},
       tasksByDate:tasksByDate,
-      history:{} // date -> completion pct (0-100)
+      history:{},
+      profile:{ name:"You", photo:null },
+      fitness:{
+        activities: DEFAULT_ACTIVITIES.slice(),
+        logs: {},
+        records: {}
+      }
     };
   }
 
   var state = null;
 
+  function migrateState(s){
+    if(!s.profile) s.profile = { name:"You", photo:null };
+    if(typeof s.profile.name !== "string" || !s.profile.name.trim()) s.profile.name = "You";
+    if(s.profile.photo === undefined) s.profile.photo = null;
+
+    if(!s.fitness){
+      s.fitness = {
+        activities: DEFAULT_ACTIVITIES.slice(),
+        logs: {},
+        records: {}
+      };
+    }
+    if(!s.fitness.activities || s.fitness.activities.length === 0){
+      s.fitness.activities = DEFAULT_ACTIVITIES.slice();
+    } else {
+      var dropped = { fit_6:true, fit_7:true, fit_8:true };
+      s.fitness.activities = s.fitness.activities.filter(function(a){ return !dropped[a.id]; });
+    }
+    if(!s.fitness.logs) s.fitness.logs = {};
+    if(!s.fitness.records) s.fitness.records = {};
+    return s;
+  }
+
   function loadState(){
-    return window.storage.get(STORAGE_KEY, false).then(function(res){
-      if(res && res.value){
-        try { return JSON.parse(res.value); } catch(e){ return defaultState(); }
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        var s = JSON.parse(raw);
+        return Promise.resolve(migrateState(s));
       }
-      return defaultState();
-    }).catch(function(){ return defaultState(); });
+    } catch(e){}
+    return Promise.resolve(defaultState());
   }
 
   var saveTimer = null;
   function saveState(){
     clearTimeout(saveTimer);
     saveTimer = setTimeout(function(){
-      window.storage.set(STORAGE_KEY, JSON.stringify(state), false).catch(function(err){
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch(err){
         console.error("save failed", err);
         showToast("Couldn't save — changes may not persist");
-      });
+      }
     }, 180);
   }
 
@@ -500,13 +736,11 @@
   function rollForward(){
     var today = todayStr();
     if(state.lastActiveDate !== today){
-      // finalize previous day into history
       var prevTasks = state.tasksByDate[state.lastActiveDate] || [];
       if(prevTasks.length){
         var doneCt = prevTasks.filter(function(t){return t.done;}).length;
         var pct = Math.round((doneCt/prevTasks.length)*100);
         state.history[state.lastActiveDate] = pct;
-        // streak logic: continues if yesterday had any completion, and yesterday is exactly 1 day before today
         var gap = daysBetween(state.lastActiveDate, today);
         if(doneCt > 0 && gap === 1){
           state.streak += 1;
@@ -529,19 +763,57 @@
     return {level:lvl, into: remaining, need: xpForLevel(lvl)};
   }
 
+  function profileName(){
+    return (state.profile && state.profile.name && state.profile.name.trim()) ? state.profile.name.trim() : "You";
+  }
+  function profileInitial(){
+    var n = profileName();
+    return n.charAt(0).toUpperCase();
+  }
+  function applyAvatar(imgId, fallbackId, photo){
+    var img = document.getElementById(imgId);
+    var fallback = document.getElementById(fallbackId);
+    if(photo){
+      img.src = photo;
+      img.style.display = "block";
+      fallback.style.display = "none";
+    } else {
+      img.removeAttribute("src");
+      img.style.display = "none";
+      fallback.style.display = "flex";
+      fallback.textContent = profileInitial();
+    }
+  }
+
   function renderHUD(){
     var lv = levelFromXp(state.xp);
     document.getElementById("hudLevel").textContent = lv.level;
-    document.getElementById("hudXpLabel").textContent = lv.into + " / " + lv.need + " XP";
+
+    document.getElementById("hudNameBtn").textContent = profileName();
     document.getElementById("hudXpFill").style.width = Math.min(100, (lv.into/lv.need)*100) + "%";
     document.getElementById("hudCoins").textContent = state.coins;
+    applyAvatar("hudAvatarImg", "hudAvatarFallback", state.profile.photo);
   }
 
   function renderGreeting(){
     var h = new Date().getHours();
     var g = h<5 ? "Still up?" : h<12 ? "Good morning." : h<17 ? "Good afternoon." : h<21 ? "Good evening." : "Winding down?";
+    var name = profileName();
+    if(name && name !== "You"){
+      if(g.charAt(g.length-1) === "?") g = g.slice(0,-1) + ", " + name + "?";
+      else g = g.slice(0,-1) + ", " + name + ".";
+    }
     document.getElementById("greeting").textContent = g;
     document.getElementById("dateLine").textContent = new Date().toLocaleDateString(undefined,{weekday:'long', month:'long', day:'numeric'});
+  }
+
+  function renderProfile(){
+    var lv = levelFromXp(state.xp);
+    document.getElementById("profileNameInput").value = profileName() === "You" ? "" : profileName();
+    document.getElementById("profileLevel").textContent = lv.level;
+    document.getElementById("profileXp").textContent = state.xp;
+    document.getElementById("profileStreak").textContent = state.streak;
+    applyAvatar("profilePhotoImg", "profilePhotoFallback", state.profile.photo);
   }
 
   function renderQuote(){
@@ -614,7 +886,7 @@
   function renderHeatmap(){
     var grid = document.getElementById("heatmapGrid");
     grid.innerHTML = "";
-    var days = 84; // 12 weeks
+    var days = 84;
     var today = new Date();
     var cellsByDate = {};
     for(var i=days-1;i>=0;i--){
@@ -646,9 +918,147 @@
     return Math.round((done/tasks.length)*100);
   }
 
+  // FITNESS MODULE FUNCTIONS
+  function renderFitnessDate(){
+    var dateStr = new Date().toLocaleDateString(undefined,{weekday:'short', month:'short', day:'numeric'});
+    document.getElementById("fitnessDate").textContent = dateStr;
+    document.getElementById("fitnessDateLine").textContent = dateStr;
+  }
+
+  function renderFitnessRecords(){
+    var grid = document.getElementById("recordsGrid");
+    grid.innerHTML = "";
+    var activities = state.fitness.activities;
+    var records = state.fitness.records;
+    var count = 0;
+
+    activities.forEach(function(act){
+      var rec = records[act.id];
+      if(rec && rec.value > 0){
+        count++;
+        var card = document.createElement("div");
+        card.className = "glass record-mini";
+        card.innerHTML =
+          '<div class="record-mini-left">' +
+            '<span class="record-mini-icon">' + act.icon + '</span>' +
+            '<span class="record-mini-name">' + act.name + '</span>' +
+          '</div>' +
+          '<span class="record-mini-val">' + rec.value + '</span>';
+        grid.appendChild(card);
+      }
+    });
+
+    document.getElementById("recordsCount").textContent = count + " tracked";
+
+    if(count === 0){
+      grid.innerHTML = '<div class="glass" style="grid-column:1/-1; padding:20px; text-align:center;"><div style="font-size:13px; color:var(--text-dim);">Log your first workout to set a record!</div></div>';
+    }
+  }
+
+  function renderFitnessPage(){
+    renderFitnessDate();
+    renderFitnessRecords();
+
+    var wrap = document.getElementById("activityList");
+    wrap.innerHTML = "";
+
+    var activities = state.fitness.activities;
+    var today = todayStr();
+    var todayLog = state.fitness.logs[today] || {};
+
+    if(activities.length === 0){
+      wrap.innerHTML = '<div class="glass empty-state"><div class="empty-icon">🏋️</div><div class="empty-title">No activities yet</div><div class="empty-sub">Add your first activity below to start tracking.</div></div>';
+      return;
+    }
+
+    activities.forEach(function(act){
+      var val = todayLog[act.id] || "";
+      var card = document.createElement("div");
+      card.className = "glass activity-card";
+      card.innerHTML =
+        '<div class="activity-header">' +
+          '<div class="activity-left">' +
+            '<span class="activity-icon">' + act.icon + '</span>' +
+            '<span class="activity-name">' + act.name + '<span class="activity-unit">(' + act.unit + ')</span></span>' +
+          '</div>' +
+          '<button class="activity-delete" data-id="' + act.id + '" aria-label="Delete ' + act.name + '">×</button>' +
+        '</div>' +
+        '<div class="activity-input-row">' +
+          '<input type="number" class="activity-input" data-act="' + act.id + '" placeholder="0" value="' + val + '" min="0" step="any">' +
+          '<button class="activity-btn" data-act="' + act.id + '" aria-label="Save ' + act.name + ' log">✓</button>' +
+        '</div>';
+      wrap.appendChild(card);
+    });
+  }
+
+  function saveFitnessLog(activityId, value){
+    var today = todayStr();
+    if(!state.fitness.logs[today]) state.fitness.logs[today] = {};
+    state.fitness.logs[today][activityId] = value;
+
+    var act = state.fitness.activities.find(function(a){ return a.id === activityId; });
+    if(act && value > 0){
+      var currentRec = state.fitness.records[activityId];
+      if(!currentRec || value > currentRec.value){
+        state.fitness.records[activityId] = {
+          value: value,
+          date: today
+        };
+        showToast("🏆 New personal record: " + act.name + " = " + value + " " + act.unit);
+      }
+    }
+
+    state.xp += 2;
+    state.coins += 1;
+
+    saveState();
+    renderFitnessPage();
+    renderHUD();
+  }
+
+  function addActivity(name){
+    if(!name || name.trim() === ""){
+      showToast("Please enter an activity name");
+      return;
+    }
+
+    var icons = ["💪", "🏋️", "🎯", "✊", "🚶", "🔥", "⚖️", "📏", "🧘", "🏃", "🚴", "🏊", "⚡", "🏆"];
+    var newAct = {
+      id: "fit_" + uid(),
+      name: name.trim(),
+      unit: "reps",
+      icon: icons[Math.floor(Math.random() * icons.length)]
+    };
+
+    state.fitness.activities.push(newAct);
+    saveState();
+    renderFitnessPage();
+    showToast("Added: " + newAct.name);
+  }
+
+  function deleteActivity(activityId){
+    var act = state.fitness.activities.find(function(a){ return a.id === activityId; });
+    if(!act) return;
+
+    state.fitness.activities = state.fitness.activities.filter(function(a){ return a.id !== activityId; });
+
+    Object.keys(state.fitness.logs).forEach(function(date){
+      if(state.fitness.logs[date][activityId]){
+        delete state.fitness.logs[date][activityId];
+      }
+    });
+    delete state.fitness.records[activityId];
+
+    saveState();
+    renderFitnessPage();
+    showToast("Removed: " + act.name);
+  }
+
   function renderAll(){
     renderHUD(); renderGreeting(); renderQuote(); renderRing();
     renderStreak(); renderQuickLog(); renderTasks(); renderHeatmap();
+
+    renderFitnessPage(); renderProfile();
   }
 
   function nowTime(){
@@ -688,17 +1098,29 @@
     saveState(); renderQuickLog();
   }
 
-  function initNav(){
+
+  function showPage(target){
     var pages = ["home","habits","fitness","analytics","profile"];
+    pages.forEach(function(p){
+      var el = document.getElementById("page-"+p);
+      if(el) el.classList.toggle("active", p===target);
+    });
+    document.querySelectorAll(".nav-btn[data-page]").forEach(function(b){
+      b.classList.toggle("active", b.dataset.page===target);
+    });
+  }
+
+  function initNav(){
     document.querySelectorAll(".nav-btn[data-page]").forEach(function(btn){
       btn.addEventListener("click", function(){
-        var target = btn.dataset.page;
-        pages.forEach(function(p){
-          document.getElementById("page-"+p).classList.toggle("active", p===target);
-        });
-        document.querySelectorAll(".nav-btn[data-page]").forEach(function(b){
-          b.classList.toggle("active", b===btn);
-        });
+
+
+
+
+
+
+
+        showPage(btn.dataset.page);
       });
     });
     document.getElementById("fabAdd").addEventListener("click", function(){
@@ -719,6 +1141,120 @@
     });
     document.getElementById("waterPlus").addEventListener("click", function(){ adjustWater(1); });
     document.getElementById("waterMinus").addEventListener("click", function(){ adjustWater(-1); });
+
+    // FITNESS EVENT LISTENERS
+    document.getElementById("activityList").addEventListener("click", function(e){
+      var delBtn = e.target.closest(".activity-delete");
+      if(delBtn){
+        var actId = delBtn.dataset.id;
+        if(confirm("Delete this activity and all its logs?")){
+          deleteActivity(actId);
+        }
+        return;
+      }
+
+      var saveBtn = e.target.closest(".activity-btn");
+      if(saveBtn){
+        var actId = saveBtn.dataset.act;
+        var input = document.querySelector('.activity-input[data-act="' + actId + '"]');
+        if(input){
+          var val = parseFloat(input.value) || 0;
+          saveFitnessLog(actId, val);
+        }
+      }
+    });
+
+    document.getElementById("activityList").addEventListener("keydown", function(e){
+      if(e.key === "Enter" && e.target.classList.contains("activity-input")){
+        var actId = e.target.dataset.act;
+        var val = parseFloat(e.target.value) || 0;
+        saveFitnessLog(actId, val);
+      }
+    });
+
+    document.getElementById("addActivityBtn").addEventListener("click", function(){
+      var input = document.getElementById("newActivityName");
+      addActivity(input.value);
+      input.value = "";
+    });
+
+    document.getElementById("newActivityName").addEventListener("keydown", function(e){
+      if(e.key === "Enter"){
+        addActivity(e.target.value);
+        e.target.value = "";
+      }
+    });
+
+    function openProfile(){ showPage("profile"); }
+
+    document.getElementById("hudAvatarBtn").addEventListener("click", openProfile);
+    document.getElementById("hudNameBtn").addEventListener("click", openProfile);
+
+    document.getElementById("profilePhotoBtn").addEventListener("click", function(){
+      document.getElementById("profilePhotoInput").click();
+    });
+
+    document.getElementById("profilePhotoInput").addEventListener("change", function(e){
+      var file = e.target.files && e.target.files[0];
+      e.target.value = "";
+      if(!file) return;
+      if(file.size > 8 * 1024 * 1024){
+        showToast("Choose a smaller photo");
+        return;
+      }
+      compressImage(file, function(dataUrl){
+        state.profile.photo = dataUrl;
+        saveState();
+        renderHUD();
+        renderProfile();
+        showToast("Profile photo updated");
+      });
+    });
+
+    document.getElementById("profileRemovePhotoBtn").addEventListener("click", function(){
+      state.profile.photo = null;
+      saveState();
+      renderHUD();
+      renderProfile();
+      showToast("Photo removed");
+    });
+
+    function saveProfileName(){
+      var name = document.getElementById("profileNameInput").value.trim();
+      state.profile.name = name || "You";
+      saveState();
+      renderHUD();
+      renderGreeting();
+      renderProfile();
+      showToast("Name saved");
+    }
+    document.getElementById("profileSaveBtn").addEventListener("click", saveProfileName);
+    document.getElementById("profileNameInput").addEventListener("keydown", function(e){
+      if(e.key === "Enter") saveProfileName();
+    });
+  }
+
+  function compressImage(file, cb){
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      var img = new Image();
+      img.onload = function(){
+        var canvas = document.createElement("canvas");
+        var size = 256;
+        canvas.width = size;
+        canvas.height = size;
+        var ctx = canvas.getContext("2d");
+        var side = Math.min(img.width, img.height);
+        var sx = (img.width - side) / 2;
+        var sy = (img.height - side) / 2;
+        ctx.drawImage(img, sx, sy, side, side, 0, 0, size, size);
+        cb(canvas.toDataURL("image/jpeg", 0.8));
+      };
+      img.onerror = function(){ showToast("Couldn't read that image"); };
+      img.src = ev.target.result;
+    };
+    reader.onerror = function(){ showToast("Couldn't read that image"); };
+    reader.readAsDataURL(file);
   }
 
   function boot(){
