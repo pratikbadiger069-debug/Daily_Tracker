@@ -178,7 +178,53 @@
   .task-btn.cancel{ background:#1c202d; color:var(--text-dim); border:1px solid var(--border); }
   .task-btn.cancel:hover{ border-color:var(--red); color:var(--red); }
   .task-btn.delete{ background:rgba(255,51,85,0.15); color:var(--red); border:1px solid rgba(255,51,85,0.3); }
-  .task-btn.delete:hover{ background:var(--red); color:#fff; } .task-edit-btn{ width:28px; height:28px; border-radius:6px; border:1px solid var(--border); background:transparent; color:var(--text-dim); font-size:14px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .15s ease; flex:none; margin-left:auto; } .task-edit-btn:hover{ border-color:var(--green); color:var(--green); } .task.editing .task-edit-btn{ display:none; } .task.editing .task-actions{ display:flex; width:100%; }
+  .task-btn.delete:hover{ background:var(--red); color:#fff; }"
+  /* iOS-STYLE ACTION MENU (3-DOT) */
+  .action-menu-overlay{ position:fixed; inset:0; z-index:90; background:rgba(0,0,0,0.4); opacity:0; visibility:hidden; transition:opacity .2s ease, visibility .2s ease; }
+  .action-menu-overlay.show{ opacity:1; visibility:visible; }
+  .action-menu{ position:absolute; z-index:91; min-width:160px; background:rgba(30,35,50,0.95); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--border); border-radius:var(--radius-md); box-shadow:0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05) inset; padding:6px; transform:scale(0.9); opacity:0; transition:transform .2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity .15s ease; pointer-events:none; }
+  .action-menu.show{ transform:scale(1); opacity:1; pointer-events:auto; }
+  .action-menu-item{ display:flex; align-items:center; gap:10px; width:100%; padding:10px 12px; border:none; background:transparent; color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; border-radius:8px; cursor:pointer; transition:background .15s ease; text-align:left; }
+  .action-menu-item:hover{ background:rgba(255,255,255,0.1); }
+  .action-menu-item:active{ background:rgba(255,255,255,0.15); transform:scale(0.98); }
+  .action-menu-item svg{ width:18px; height:18px; flex:none; opacity:0.8; }
+  .action-menu-item.edit{ color:var(--blue); }
+  .action-menu-item.complete{ color:var(--green); }
+  .action-menu-item.delete{ color:var(--red); }
+  .action-menu-divider{ height:1px; background:var(--border); margin:6px 0; }
+
+  /* iOS-STYLE BOTTOM SHEET */
+  .bottom-sheet-overlay{ position:fixed; inset:0; z-index:80; background:rgba(0,0,0,0.5); opacity:0; visibility:hidden; transition:opacity .25s ease, visibility .25s ease; }
+  .bottom-sheet-overlay.show{ opacity:1; visibility:visible; }
+  .bottom-sheet{ position:fixed; left:0; right:0; bottom:0; z-index:81; max-height:85vh; background:rgba(21,24,34,0.98); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-top-left-radius:20px; border-top-right-radius:20px; border:1px solid var(--border); border-bottom:none; box-shadow:0 -8px 40px rgba(0,0,0,0.5); transform:translateY(100%); transition:transform .3s cubic-bezier(0.32, 0.72, 0, 1); overflow:hidden; }
+  .bottom-sheet.show{ transform:translateY(0); }
+  .bottom-sheet-handle{ width:36px; height:5px; border-radius:99px; background:rgba(255,255,255,0.2); margin:10px auto; cursor:grab; }
+  .bottom-sheet-header{ display:flex; align-items:center; justify-content:space-between; padding:8px 20px 16px; border-bottom:1px solid var(--border); }
+  .bottom-sheet-title{ font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1px; color:var(--text); }
+  .bottom-sheet-close{ width:32px; height:32px; border-radius:8px; border:none; background:rgba(255,255,255,0.1); color:var(--text-dim); font-size:20px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .15s ease; }
+  .bottom-sheet-close:hover{ background:rgba(255,51,85,0.2); color:var(--red); }
+  .bottom-sheet-body{ padding:20px; overflow-y:auto; max-height:calc(85vh - 80px); }
+  .bottom-sheet-body .form-group{ margin-bottom:16px; }
+  .bottom-sheet-body .form-label{ display:block; font-size:11px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(--text-faint); margin-bottom:6px; }
+  .bottom-sheet-body .form-input{ width:100%; height:48px; border-radius:10px; border:1.5px solid var(--border); background:#10121a; color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:500; padding:0 14px; outline:none; transition:border-color .15s ease, box-shadow .15s ease; }
+  .bottom-sheet-body .form-input:focus{ border-color:var(--green); box-shadow:0 0 0 3px rgba(204,255,0,0.15); }
+  .bottom-sheet-body .form-select{ width:100%; height:48px; border-radius:10px; border:1.5px solid var(--border); background:#10121a; color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; padding:0 14px; outline:none; cursor:pointer; }
+  .bottom-sheet-body .form-row{ display:flex; gap:12px; }
+  .bottom-sheet-body .form-row .form-group{ flex:1; }
+  .bottom-sheet-actions{ display:flex; gap:10px; padding:16px 20px 20px; border-top:1px solid var(--border); background:rgba(0,0,0,0.2); }
+  .bottom-sheet-btn{ flex:1; height:48px; border-radius:12px; border:none; font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; cursor:pointer; transition:all .15s ease; }
+  .bottom-sheet-btn.cancel{ background:var(--surface-strong); color:var(--text-dim); border:1px solid var(--border); }
+  .bottom-sheet-btn.cancel:hover{ border-color:var(--red); color:var(--red); }
+  .bottom-sheet-btn.save{ background:var(--green); color:#000; box-shadow:0 0 16px rgba(204,255,0,0.3); }
+  .bottom-sheet-btn.save:hover{ box-shadow:0 0 24px rgba(204,255,0,0.5); }
+  .bottom-sheet-btn.delete{ background:rgba(255,51,85,0.15); color:var(--red); border:1px solid rgba(255,51,85,0.3); }
+  .bottom-sheet-btn.delete:hover{ background:var(--red); color:#fff; }
+
+  /* UPDATED TASK MENU BUTTON */
+  .task-menu-btn{ width:28px; height:28px; border-radius:6px; border:1px solid var(--border); background:transparent; color:var(--text-dim); font-size:16px; font-weight:700; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .15s ease; flex:none; margin-left:auto; letter-spacing:0; font-family:system-ui,sans-serif; }
+  .task-menu-btn:hover{ border-color:var(--green); color:var(--green); background:rgba(204,255,0,0.1); }
+  .task-menu-btn:active{ transform:scale(0.92); }
+" .task-edit-btn{ width:28px; height:28px; border-radius:6px; border:1px solid var(--border); background:transparent; color:var(--text-dim); font-size:14px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .15s ease; flex:none; margin-left:auto; } .task-edit-btn:hover{ border-color:var(--green); color:var(--green); } .task.editing .task-edit-btn{ display:none; } .task.editing .task-actions{ display:flex; width:100%; }
   .task.editing .task-edit{ display:flex; }
   .task.editing .task-body{ display:none; }
 
@@ -1310,9 +1356,9 @@
       var checkBtn = e.target.closest(".task-check");
       if(checkBtn){ toggleTask(checkBtn.dataset.id); return; }
 
-      var editBtn = e.target.closest(".task-edit-btn");
-      if(editBtn){
-        var taskEl = editBtn.closest(".task");
+      var menuBtn = e.target.closest(".task-menu-btn");
+      if(menuBtn){
+        showActionMenu(menuBtn, menuBtn.dataset.id); return;
         document.querySelectorAll(".task.editing").forEach(function(t){ t.classList.remove("editing"); });
         taskEl.classList.add("editing");
         taskEl.querySelector(".edit-name").focus();
@@ -1498,7 +1544,175 @@
       rollForward();
       saveState();
       initNav();
-      initEvents();
+      "
+
+  // iOS-STYLE COMPONENT FUNCTIONS
+  var currentEditTaskId = null;
+
+  function showActionMenu(btn, taskId) {
+    var menu = document.getElementById('actionMenu');
+    var overlay = document.getElementById('actionMenuOverlay');
+    var rect = btn.getBoundingClientRect();
+    
+    currentEditTaskId = taskId;
+    
+    // Position menu near the button
+    menu.style.top = (rect.bottom + 8) + 'px';
+    menu.style.right = (window.innerWidth - rect.right) + 'px';
+    
+    // Show overlay and menu with animation
+    overlay.classList.add('show');
+    setTimeout(function() { menu.classList.add('show'); }, 10);
+  }
+
+  function hideActionMenu() {
+    var menu = document.getElementById('actionMenu');
+    var overlay = document.getElementById('actionMenuOverlay');
+    menu.classList.remove('show');
+    overlay.classList.remove('show');
+    currentEditTaskId = null;
+  }
+
+  function showBottomSheet(taskId) {
+    var sheet = document.getElementById('bottomSheet');
+    var overlay = document.getElementById('bottomSheetOverlay');
+    var task = state.tasks.find(function(t) { return t.id === taskId; });
+    
+    if (!task) return;
+    
+    currentEditTaskId = taskId;
+    
+    // Populate form
+    document.getElementById('editTaskName').value = task.name;
+    document.getElementById('editTaskCat').value = task.category || 'Day';
+    document.getElementById('editTaskXp').value = task.xp;
+    
+    // Show overlay and sheet with animation
+    overlay.classList.add('show');
+    setTimeout(function() { sheet.classList.add('show'); }, 10);
+    
+    // Focus on name input
+    setTimeout(function() { document.getElementById('editTaskName').focus(); }, 300);
+  }
+
+  function hideBottomSheet() {
+    var sheet = document.getElementById('bottomSheet');
+    var overlay = document.getElementById('bottomSheetOverlay');
+    sheet.classList.remove('show');
+    overlay.classList.remove('show');
+    currentEditTaskId = null;
+  }
+
+  function saveTaskFromSheet() {
+    if (!currentEditTaskId) return;
+    
+    var task = state.tasks.find(function(t) { return t.id === currentEditTaskId; });
+    if (!task) return;
+    
+    var name = document.getElementById('editTaskName').value.trim();
+    var cat = document.getElementById('editTaskCat').value;
+    var xp = parseInt(document.getElementById('editTaskXp').value, 10) || 10;
+    
+    if (!name) {
+      showToast('Task name is required');
+      return;
+    }
+    
+    task.name = name;
+    task.category = cat;
+    task.xp = Math.max(1, Math.min(100, xp));
+    
+    saveState();
+    renderTasks();
+    renderHUD();
+    hideBottomSheet();
+    showToast('Task updated');
+  }
+
+  function deleteTaskFromSheet() {
+    if (!currentEditTaskId) return;
+    
+    var idx = state.tasks.findIndex(function(t) { return t.id === currentEditTaskId; });
+    if (idx === -1) return;
+    
+    state.tasks.splice(idx, 1);
+    saveState();
+    renderTasks();
+    renderHUD();
+    hideBottomSheet();
+    showToast('Task deleted');
+  }
+
+  function toggleTaskComplete(taskId) {
+    var task = state.tasks.find(function(t) { return t.id === taskId; });
+    if (!task) return;
+    
+    task.done = !task.done;
+    
+    if (task.done) {
+      state.xp += task.xp;
+      state.coins += Math.ceil(task.xp / 5);
+    } else {
+      state.xp = Math.max(0, state.xp - task.xp);
+      state.coins = Math.max(0, state.coins - Math.ceil(task.xp / 5));
+    }
+    
+    saveState();
+    renderTasks();
+    renderHUD();
+    hideActionMenu();
+    showToast(task.done ? 'Task completed!' : 'Task unmarked');
+  }
+
+  // Initialize event listeners for iOS components
+  function initIosComponents() {
+    // Action menu overlay click to close
+    document.getElementById('actionMenuOverlay').addEventListener('click', hideActionMenu);
+    
+    // Action menu item clicks
+    document.getElementById('actionMenu').addEventListener('click', function(e) {
+      var item = e.target.closest('.action-menu-item');
+      if (!item) return;
+      
+      var action = item.dataset.action;
+      var taskId = currentEditTaskId;
+      
+      if (action === 'edit') {
+        hideActionMenu();
+        showBottomSheet(taskId);
+      } else if (action === 'complete') {
+        toggleTaskComplete(taskId);
+      } else if (action === 'delete') {
+        var task = state.tasks.find(function(t) { return t.id === taskId; });
+        if (task) {
+          state.tasks = state.tasks.filter(function(t) { return t.id !== taskId; });
+          saveState();
+          renderTasks();
+          renderHUD();
+        }
+        hideActionMenu();
+        showToast('Task deleted');
+      }
+    });
+    
+    // Bottom sheet close handlers
+    document.getElementById('bottomSheetOverlay').addEventListener('click', hideBottomSheet);
+    document.getElementById('bottomSheetClose').addEventListener('click', hideBottomSheet);
+    document.getElementById('cancelTaskBtn').addEventListener('click', hideBottomSheet);
+    document.getElementById('saveTaskBtn').addEventListener('click', saveTaskFromSheet);
+    document.getElementById('deleteTaskBtn').addEventListener('click', deleteTaskFromSheet);
+    
+    // Escape key to close modals
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        hideActionMenu();
+        hideBottomSheet();
+      }
+    });
+  }
+"
+    initEvents();
+    initIosComponents();
       renderAll();
     });
   }
@@ -1510,5 +1724,50 @@
   }
 })();
 </script>
-</body>
+"
+
+  <!-- Action Menu Overlay -->
+  <div class="action-menu-overlay" id="actionMenuOverlay"></div>
+  <div class="action-menu" id="actionMenu" role="menu" aria-label="Task actions">
+    <button class="action-menu-item edit" data-action="edit" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit</button>
+    <button class="action-menu-item complete" data-action="complete" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Toggle Complete</button>
+    <div class="action-menu-divider"></div>
+    <button class="action-menu-item delete" data-action="delete" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Delete</button>
+  </div>
+
+  <!-- Bottom Sheet Overlay -->
+  <div class="bottom-sheet-overlay" id="bottomSheetOverlay"></div>
+  <div class="bottom-sheet" id="bottomSheet" role="dialog" aria-modal="true" aria-labelledby="bottomSheetTitle">
+    <div class="bottom-sheet-handle"></div>
+    <div class="bottom-sheet-header">
+      <h3 class="bottom-sheet-title" id="bottomSheetTitle">Edit Task</h3>
+      <button class="bottom-sheet-close" id="bottomSheetClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="bottom-sheet-body" id="bottomSheetBody">
+      <div class="form-group">
+        <label class="form-label" for="editTaskName">Task Name</label>
+        <input type="text" class="form-input" id="editTaskName" placeholder="Enter task name" maxlength="50" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="editTaskCat">Category</label>
+          <select class="form-select" id="editTaskCat">
+            <option value="Morning">Morning</option>
+            <option value="Day">Day</option>
+            <option value="Evening">Evening</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="editTaskXp">XP Value</label>
+          <input type="number" class="form-input" id="editTaskXp" min="1" max="100" placeholder="10" />
+        </div>
+      </div>
+    </div>
+    <div class="bottom-sheet-actions">
+      <button class="bottom-sheet-btn delete" id="deleteTaskBtn">Delete</button>
+      <button class="bottom-sheet-btn cancel" id="cancelTaskBtn">Cancel</button>
+      <button class="bottom-sheet-btn save" id="saveTaskBtn">Save</button>
+    </div>
+  </div>
+"</body>
 </html>

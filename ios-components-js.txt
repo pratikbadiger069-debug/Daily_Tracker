@@ -1,0 +1,167 @@
+"
+
+  // iOS-STYLE COMPONENT FUNCTIONS
+  var currentEditTaskId = null;
+
+  function showActionMenu(btn, taskId) {
+    var menu = document.getElementById('actionMenu');
+    var overlay = document.getElementById('actionMenuOverlay');
+    var rect = btn.getBoundingClientRect();
+    
+    currentEditTaskId = taskId;
+    
+    // Position menu near the button
+    menu.style.top = (rect.bottom + 8) + 'px';
+    menu.style.right = (window.innerWidth - rect.right) + 'px';
+    
+    // Show overlay and menu with animation
+    overlay.classList.add('show');
+    setTimeout(function() { menu.classList.add('show'); }, 10);
+  }
+
+  function hideActionMenu() {
+    var menu = document.getElementById('actionMenu');
+    var overlay = document.getElementById('actionMenuOverlay');
+    menu.classList.remove('show');
+    overlay.classList.remove('show');
+    currentEditTaskId = null;
+  }
+
+  function showBottomSheet(taskId) {
+    var sheet = document.getElementById('bottomSheet');
+    var overlay = document.getElementById('bottomSheetOverlay');
+    var task = state.tasks.find(function(t) { return t.id === taskId; });
+    
+    if (!task) return;
+    
+    currentEditTaskId = taskId;
+    
+    // Populate form
+    document.getElementById('editTaskName').value = task.name;
+    document.getElementById('editTaskCat').value = task.category || 'Day';
+    document.getElementById('editTaskXp').value = task.xp;
+    
+    // Show overlay and sheet with animation
+    overlay.classList.add('show');
+    setTimeout(function() { sheet.classList.add('show'); }, 10);
+    
+    // Focus on name input
+    setTimeout(function() { document.getElementById('editTaskName').focus(); }, 300);
+  }
+
+  function hideBottomSheet() {
+    var sheet = document.getElementById('bottomSheet');
+    var overlay = document.getElementById('bottomSheetOverlay');
+    sheet.classList.remove('show');
+    overlay.classList.remove('show');
+    currentEditTaskId = null;
+  }
+
+  function saveTaskFromSheet() {
+    if (!currentEditTaskId) return;
+    
+    var task = state.tasks.find(function(t) { return t.id === currentEditTaskId; });
+    if (!task) return;
+    
+    var name = document.getElementById('editTaskName').value.trim();
+    var cat = document.getElementById('editTaskCat').value;
+    var xp = parseInt(document.getElementById('editTaskXp').value, 10) || 10;
+    
+    if (!name) {
+      showToast('Task name is required');
+      return;
+    }
+    
+    task.name = name;
+    task.category = cat;
+    task.xp = Math.max(1, Math.min(100, xp));
+    
+    saveState();
+    renderTasks();
+    renderHUD();
+    hideBottomSheet();
+    showToast('Task updated');
+  }
+
+  function deleteTaskFromSheet() {
+    if (!currentEditTaskId) return;
+    
+    var idx = state.tasks.findIndex(function(t) { return t.id === currentEditTaskId; });
+    if (idx === -1) return;
+    
+    state.tasks.splice(idx, 1);
+    saveState();
+    renderTasks();
+    renderHUD();
+    hideBottomSheet();
+    showToast('Task deleted');
+  }
+
+  function toggleTaskComplete(taskId) {
+    var task = state.tasks.find(function(t) { return t.id === taskId; });
+    if (!task) return;
+    
+    task.done = !task.done;
+    
+    if (task.done) {
+      state.xp += task.xp;
+      state.coins += Math.ceil(task.xp / 5);
+    } else {
+      state.xp = Math.max(0, state.xp - task.xp);
+      state.coins = Math.max(0, state.coins - Math.ceil(task.xp / 5));
+    }
+    
+    saveState();
+    renderTasks();
+    renderHUD();
+    hideActionMenu();
+    showToast(task.done ? 'Task completed!' : 'Task unmarked');
+  }
+
+  // Initialize event listeners for iOS components
+  function initIosComponents() {
+    // Action menu overlay click to close
+    document.getElementById('actionMenuOverlay').addEventListener('click', hideActionMenu);
+    
+    // Action menu item clicks
+    document.getElementById('actionMenu').addEventListener('click', function(e) {
+      var item = e.target.closest('.action-menu-item');
+      if (!item) return;
+      
+      var action = item.dataset.action;
+      var taskId = currentEditTaskId;
+      
+      if (action === 'edit') {
+        hideActionMenu();
+        showBottomSheet(taskId);
+      } else if (action === 'complete') {
+        toggleTaskComplete(taskId);
+      } else if (action === 'delete') {
+        var task = state.tasks.find(function(t) { return t.id === taskId; });
+        if (task) {
+          state.tasks = state.tasks.filter(function(t) { return t.id !== taskId; });
+          saveState();
+          renderTasks();
+          renderHUD();
+        }
+        hideActionMenu();
+        showToast('Task deleted');
+      }
+    });
+    
+    // Bottom sheet close handlers
+    document.getElementById('bottomSheetOverlay').addEventListener('click', hideBottomSheet);
+    document.getElementById('bottomSheetClose').addEventListener('click', hideBottomSheet);
+    document.getElementById('cancelTaskBtn').addEventListener('click', hideBottomSheet);
+    document.getElementById('saveTaskBtn').addEventListener('click', saveTaskFromSheet);
+    document.getElementById('deleteTaskBtn').addEventListener('click', deleteTaskFromSheet);
+    
+    // Escape key to close modals
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        hideActionMenu();
+        hideBottomSheet();
+      }
+    });
+  }
+"
